@@ -14,7 +14,7 @@ jobs:
   # 하나의 jobs을 "build" 라고 합니다.
   build: 
     name: Running Test and CI / CD
-    runs-on: ubuntu-latest
+    runs-on: macos-11
     
     steps:
       # 하나의 step은 name과 uses(or run) 으로 구성됩니다.
