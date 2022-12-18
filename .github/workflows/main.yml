@@ -1,0 +1,54 @@
+# 하나의 Workflow 를 정의하는 파일입니다.
+
+# Workflow 이름
+name: Flutter_Github_Actions
+
+# Event 를 정의합니다.
+on:
+  # main 브랜치에 push 커맨드를 수행할 경우 동작합니다.
+  push:
+    branches: [ main ]
+    
+# job 들을 정의합니다.
+jobs:
+  # 하나의 jobs을 "build" 라고 합니다.
+  build: 
+    name: Running Test and CI / CD
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 하나의 step은 name과 uses(or run) 으로 구성됩니다.
+      # name 은 step의 이름이 정의됩니다.
+      # uses 는 미리 직접 만들어진 action 입니다.
+      # Github repository으 소스르 가져오는 action 입니다.
+      - name: Checkout source code
+        uses: actions/checkout@v2
+        
+      # 두번째 step은 인스턴스에 Flutter SDK를 설치하는 action 입니다.
+      # with 커맨드를 통해 Flutter SDK 의 버전을 특정하 수 있습니다.
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v1.5.1
+        
+      # 세번째 step은 해다 레포지토리가 사용하는 패키지를 import 합니다.
+      # 직접 인스턴스에 커맨드를 입력합니다.
+      - name: Import Flutter Package
+        run: |
+          flutter pub get
+          
+      # 네번째 step은 작성된 코드를 test하는 단계입니다.
+      - name: Test Flutter
+        run: |
+          flutter test
+          
+      # 다섯번째 step은 작성된 코드르 build 하느 단계입니다.
+      - name: Build Flutter ios
+        run: |
+          flutter build ios
+      
+      
+      
+      
+      
+      
+        
+        
