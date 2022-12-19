@@ -14,7 +14,7 @@ jobs:
   # 하나의 jobs을 "build" 라고 합니다.
   build: 
     name: Running Test and CI / CD
-    runs-on: macos-11
+    runs-on: macos-latest
     
     steps:
       # 하나의 step은 name과 uses(or run) 으로 구성됩니다.
@@ -40,12 +40,16 @@ jobs:
         run: |
           flutter test
           
-      # 다섯번째 step은 작성된 코드르 build 하느 단계입니다.
+      # 다섯번째 step은 작성된 코드르 build 하는 단계입니다.
       - name: Build Flutter ios
         run: |
-          flutter build ipa
+          flutter build ios --release --no-codesign
       
-      
+      - name: Archive IOS
+        uses: actions/upload-artifact@v1
+        with:
+          name: ios-build
+          path: build/ios/iphoneos
       
       
       
