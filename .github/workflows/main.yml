@@ -43,7 +43,7 @@ jobs:
       # 다섯번째 step은 작성된 코드르 build 하느 단계입니다.
       - name: Build Flutter ios
         run: |
-          flutter build ios
+          flutter build ipa
       
       
       
